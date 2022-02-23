@@ -1,0 +1,40 @@
+#drop table aluno;
+CREATE TABLE tb_aluno (
+    codAluno integer auto_increment NOT NULL,
+    nomeAluno varchar(40) NOT NULL,
+    nomeMae varchar(40),
+    nomePai varchar(40),
+    dataNasc Date NOT NULL,
+    medAluno decimal(4,2),
+    sitAluno varchar(15),
+    PRIMARY KEY (codAluno)
+);
+#drop table disciplina;
+CREATE TABLE tb_disciplina (
+    codDisciplina integer auto_increment NOT NULL,
+    nomeDisciplina varchar(40) NOT NULL,
+    nomeProfessor varchar(40) NOT NULL,
+    qntdAvaliacoes integer NOT NULL,
+    PRIMARY KEY (codDisciplina)
+);
+#drop table matricula;
+CREATE TABLE tb_matricula (
+	nrMatricula integer auto_increment NOT NULL,
+    codAluno integer NOT NULL,
+    codDisciplina integer NOT NULL,
+    dtMatricula Date NOT NULL,
+    statusMatricula varchar(15) NOT NULL,  
+    primary key (nrMatricula),
+    foreign key (codAluno) references tb_aluno(codAluno),
+	foreign key (codDisciplina) references tb_disciplina(codDisciplina)
+);
+#drop table avaliacao;
+CREATE TABLE tb_avaliacao (
+	nrAvaliacao integer auto_increment NOT NULL,
+    codAluno integer NOT NULL,
+    codDisciplina integer NOT NULL,    
+    vlrNota decimal(4,2) NOT NULL,
+    primary key (nrAvaliacao),
+	foreign key (codAluno) references tb_aluno(codAluno),
+    foreign key (codDisciplina) references tb_disciplina(codDisciplina)
+);
